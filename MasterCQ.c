@@ -3,60 +3,60 @@
 
 #define MAX_SIZE 10
 
-int front = -1, rear = -1;
+int F = -1, R = -1;
 int queue[MAX_SIZE];
 
 void enqueue(int value) {
-    if ((front == 0 && rear == MAX_SIZE - 1) || (rear == front - 1)) {
+    if ((F == 0 && R == MAX_SIZE - 1) || (R == F - 1)) {
         printf("Queue is full\n");
         return;
     }
-    else if (front == -1 && rear == -1) {
-        front = rear = 0;
+    else if (F == -1 && R == -1) {
+        F = R = 0;
     }
-    else if (rear == MAX_SIZE - 1 && front != 0) {
-        rear = 0;
+    else if (R == MAX_SIZE - 1 && F != 0) {
+        R = 0;
     }
     else {
-        rear++;
+        R++;
     }
-    queue[rear] = value;
+    queue[R] = value;
 }
 
 int dequeue() {
-    if (front == -1 && rear == -1) {
+    if (F == -1 && R == -1) {
         printf("Queue is empty\n");
         return -1;
     }
-    int value = queue[front];
-    if (front == rear) {
-        front = rear = -1;
+    int value = queue[F];
+    if (F == R) {
+        F = R = -1;
     }
-    else if (front == MAX_SIZE - 1) {
-        front = 0;
+    else if (F == MAX_SIZE - 1) {
+        F = 0;
     }
     else {
-        front++;
+        F++;
     }
     return value;
 }
 
 void display() {
-    if (front == -1 && rear == -1) {
+    if (F == -1 && R == -1) {
         printf("Queue is empty\n");
         return;
     }
     printf("Queue elements are:\n");
-    if (rear >= front) {
-        for (int i = front; i <= rear; i++) {
+    if (R >= F) {
+        for (int i = F; i <= R; i++) {
             printf("%d ", queue[i]);
         }
     }
     else {
-        for (int i = front; i < MAX_SIZE; i++) {
+        for (int i = F; i < MAX_SIZE; i++) {
             printf("%d ", queue[i]);
         }
-        for (int i = 0; i <= rear; i++) {
+        for (int i = 0; i <= R; i++) {
             printf("%d ", queue[i]);
         }
     }
@@ -75,7 +75,7 @@ int main() {
         case 1:
             printf("Enter element to insert: ");
             scanf("%d", &x);
-            enqueue(x);
+            enqueue(x); 
             break;
         case 2:
             x = dequeue();
